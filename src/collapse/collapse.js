@@ -25,7 +25,11 @@ angular.module('ui.bootstrap.collapse',['ui.bootstrap.transition'])
       var initialHeightVal = element[0].scrollHeight;
       var heightProperlyInitialized = false;
 
-      scope.$watch(function (){ return initialHeightVal != element[0].scrollHeight; }, function (value) {
+      var whenHidden = function (){ return element[0].scrollHeight !== 0; };
+      var whenVisible = function (){ return initialHeightVal !== element[0].scrollHeight; };
+      var heightWatcher = initialHeightVal === 0 ? whenHidden : whenVisible;
+
+      scope.$watch(heightWatcher, function (value) {
         //The listener is called when angular bindings are being resolved
         //When we have a change of height after binding we are setting again the correct height if the group is opened
         if (value && !heightProperlyInitialized) {
