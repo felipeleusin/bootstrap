@@ -25,8 +25,8 @@ angular.module('ui.bootstrap.collapse',['ui.bootstrap.transition'])
       var initialHeightVal = element[0].scrollHeight;
       var heightProperlyInitialized = false;
 
-      var whenHidden = function (){ return element[0].scrollHeight !== 0; };
-      var whenVisible = function (){ return initialHeightVal !== element[0].scrollHeight; };
+      var whenVisible = function (){ return element[0].scrollHeight !== 0; };
+      var whenHidden = function (){ return initialHeightVal !== element[0].scrollHeight; };
       var heightWatcher = initialHeightVal === 0 ? whenHidden : whenVisible;
 
       scope.$watch(heightWatcher, function (value) {
